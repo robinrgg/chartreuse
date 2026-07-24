@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Cave — Chartreuse</title>
+<meta name="theme-color" content="#0D1110">
+<meta name="description" content="Inventaire personnel d'une collection de Chartreuse.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.png" sizes="64x64">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="La Cave">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fond:#0D1110; --panneau:#151B17; --panneau-2:#1B221C;
+  --trait:rgba(233,228,211,.11); --trait-fort:rgba(233,228,211,.22);
+  --papier:#E9E4D3; --papier-2:#98A18F; --papier-3:#6B7466;
+  --sceau:#A8352A; --vif:#8FBF3F; --pad:18px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0;padding:0}
+body{
+  background:var(--fond); color:var(--papier);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;overflow-x:hidden;
+  padding-bottom:calc(40px + env(safe-area-inset-bottom));
+}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{font-family:"Marcellus",Georgia,serif;font-weight:400;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none;padding:0}
+:focus-visible{outline:2px solid var(--papier);outline-offset:2px;border-radius:4px}
+
+.entete{padding:calc(24px + env(safe-area-inset-top)) 0 14px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.sur-titre{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--papier-3);margin:0 0 6px}
+.titre{font-size:34px;line-height:.98}
+.compte{text-align:right;flex:none}
+.compte b{display:block;font-family:"Marcellus",serif;font-size:30px;line-height:1}
+.compte span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--papier-3)}
+
+.onglets{position:sticky;top:0;z-index:9;display:flex;gap:4px;
+  background:linear-gradient(var(--fond) 78%,rgba(13,17,16,0));
+  margin:0 calc(-1*var(--pad));padding:8px var(--pad) 12px}
+.onglet{flex:1;padding:11px 8px;border-radius:9px;border:1px solid var(--trait);
+  font-size:13.5px;letter-spacing:.06em;color:var(--papier-2);text-align:center;transition:.15s}
+.onglet[aria-selected="true"]{background:var(--papier);color:var(--fond);border-color:var(--papier);font-weight:600}
+.onglet .point{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--sceau);margin-left:6px;vertical-align:1px}
+
+.spectre{display:flex;height:62px;border-radius:5px;overflow:hidden;gap:1.5px;background:#000;
+  box-shadow:0 10px 30px -14px #000, inset 0 0 0 1px rgba(255,255,255,.06)}
+.seg{position:relative;min-width:7px;overflow:hidden;transition:opacity .22s}
+.seg .fill{position:absolute;inset:0;transform:scaleX(0);transform-origin:left;
+  animation:verser .75s cubic-bezier(.22,.8,.28,1) forwards}
+.seg .fill::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.02) 42%,rgba(0,0,0,.34))}
+@keyframes verser{to{transform:scaleX(1)}}
+.spectre.filtre .seg{opacity:.24}
+.spectre.filtre .seg.actif{opacity:1}
+.spectre.filtre .seg.actif::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 2px var(--papier)}
+
+.legende li{min-width:0}
+.legende{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;margin:14px 0 4px;padding:0;list-style:none}
+.leg{display:flex;align-items:center;gap:9px;width:100%;min-width:0;padding:6px 4px;border-radius:6px;text-align:left}
+.leg:hover{background:rgba(233,228,211,.05)}
+.leg .pastille{width:9px;height:9px;border-radius:2px;flex:none;box-shadow:0 0 9px -1px currentColor}
+.leg .nom{flex:1;min-width:0;font-size:13px;color:var(--papier-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.leg .n{font-size:12.5px;color:var(--papier-3)}
+.leg[aria-pressed="true"] .nom{color:var(--papier);font-weight:600}
+.resume{margin:12px 0 0;font-size:12px;letter-spacing:.06em;color:var(--papier-3);border-top:1px solid var(--trait);padding-top:12px}
+.resume b{color:var(--papier-2);font-weight:500}
+
+.section{margin-top:34px}
+.section-tete{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.section-tete h2{font-size:19px}
+.section-tete .trait{flex:1;height:1px;background:var(--trait)}
+.section-tete .indice{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--papier-3)}
+
+.an{border-bottom:1px solid var(--trait)}
+.an-tete{display:flex;align-items:center;gap:12px;width:100%;padding:9px 2px;text-align:left}
+.an-nom{width:84px;flex:none;font-family:"Marcellus",serif;font-size:15px;white-space:nowrap}
+.an-piste{flex:1;height:13px;border-radius:3px;overflow:hidden;background:rgba(233,228,211,.05)}
+.an-barre{display:flex;height:100%;gap:1px}
+.an-barre i{display:block}
+.an-n{width:24px;flex:none;text-align:right;font-size:12.5px;color:var(--papier-3)}
+.an-detail{padding:0 2px 12px 96px;font-size:12px;color:var(--papier-2);line-height:1.7}
+.an.filtre .an-barre i{opacity:.2}
+.an.filtre .an-barre i.actif{opacity:1}
+
+.outils{display:flex;gap:8px;margin:14px 0 6px}
+.champ{flex:1;display:flex;align-items:center;gap:8px;background:var(--panneau);border:1px solid var(--trait);border-radius:9px;padding:0 11px;height:42px}
+.champ svg{flex:none;opacity:.45}
+.champ input{flex:1;min-width:0;background:none;border:none;height:100%;font-size:15px;-webkit-appearance:none;appearance:none}
+.champ input::placeholder{color:var(--papier-3)}
+.champ input:focus{outline:none}
+.tri{flex:0 1 auto;min-width:0;max-width:136px;background:var(--panneau);border:1px solid var(--trait);border-radius:9px;height:42px;padding:0 30px 0 12px;
+  font-size:13px;color:var(--papier-2);-webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' stroke='%2398A18F' stroke-width='1.4' fill='none'/></svg>");
+  background-repeat:no-repeat;background-position:right 11px center}
+.liste{list-style:none;margin:0;padding:0}
+.groupe{display:flex;align-items:baseline;gap:10px;margin:22px 0 8px}
+.groupe h3{font-size:15px}
+.groupe .trait{flex:1;height:1px;background:var(--trait)}
+.groupe .n{font-size:11px;letter-spacing:.14em;color:var(--papier-3)}
+.ligne{display:flex;align-items:stretch;gap:13px;width:100%;text-align:left;padding:11px 2px;border-bottom:1px solid var(--trait)}
+.ligne:hover{background:rgba(233,228,211,.035)}
+.ligne .verre{width:3px;border-radius:3px;flex:none;box-shadow:0 0 11px -1px currentColor}
+.ligne .corps{flex:1;min-width:0}
+.ligne .cuvee,.ligne .meta{display:block}
+.ligne .cuvee{font-family:"Marcellus",serif;font-size:16.5px;line-height:1.25}
+.ligne .meta{font-size:12px;letter-spacing:.05em;color:var(--papier-2);margin-top:2px}
+.ligne .meta .sep{color:var(--papier-3);margin:0 6px}
+.ligne .don{font-style:italic;color:var(--papier-3)}
+.ligne.hors .cuvee,.ligne.hors .meta{opacity:.42;text-decoration:line-through;text-decoration-thickness:.5px}
+.vide{text-align:center;color:var(--papier-3);font-size:14px;padding:44px 20px;line-height:1.6}
+
+.grille{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grille .plein{grid-column:1/-1}
+label{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--papier-3);margin-bottom:6px}
+.saisie{width:100%;background:var(--panneau-2);border:1px solid var(--trait);border-radius:9px;padding:11px 12px;font-size:15px;-webkit-appearance:none;appearance:none}
+select.saisie{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' stroke='%2398A18F' stroke-width='1.4' fill='none'/></svg>");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.saisie:focus{outline:none;border-color:var(--trait-fort)}
+textarea.saisie{resize:vertical;min-height:58px;font-family:inherit}
+.avec-unite{position:relative}
+.avec-unite .saisie{padding-right:38px}
+.avec-unite .unite{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--papier-3);pointer-events:none}
+.raccourcis{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.raccourci{padding:5px 10px;border:1px solid var(--trait);border-radius:20px;font-size:12px;color:var(--papier-2)}
+.raccourci[aria-pressed="true"]{background:var(--papier);color:var(--fond);border-color:var(--papier)}
+.aide{font-size:11.5px;color:var(--papier-3);margin:0;line-height:1.5}
+.etats{display:flex;gap:8px}
+.etat{flex:1;padding:10px 4px;border:1px solid var(--trait);border-radius:9px;font-size:13px;color:var(--papier-2);text-align:center}
+.etat[aria-pressed="true"]{background:var(--papier);color:var(--fond);border-color:var(--papier);font-weight:600}
+.actions{display:flex;gap:10px;margin-top:20px}
+.bouton{flex:1;padding:14px;border-radius:10px;background:var(--papier);color:var(--fond);font-weight:600;font-size:15px;text-align:center}
+.bouton:disabled{opacity:.4;cursor:default}
+.bouton.secondaire{background:none;border:1px solid var(--trait-fort);color:var(--papier-2);font-weight:400}
+.bouton.danger{background:none;border:1px solid rgba(168,53,42,.6);color:#D6685C;flex:none;padding:14px 18px}
+.bouton.danger.arme{background:var(--sceau);border-color:var(--sceau);color:#fff}
+.confirmation{margin:12px 0 0;font-size:13px;color:var(--papier-2);min-height:20px}
+.confirmation b{font-weight:600;color:var(--papier)}
+
+/* couleur de cuvée */
+.couleur-ligne{display:flex;align-items:center;gap:12px}
+.pipette{width:46px;height:46px;flex:none;padding:0;border:1px solid var(--trait-fort);border-radius:50%;
+  background:none;-webkit-appearance:none;appearance:none;cursor:pointer;overflow:hidden}
+.pipette::-webkit-color-swatch-wrapper{padding:3px}
+.pipette::-webkit-color-swatch{border:none;border-radius:50%}
+.pipette::-moz-color-swatch{border:none;border-radius:50%}
+.nuancier{display:flex;flex-wrap:wrap;gap:7px;flex:1}
+.teinte{width:24px;height:24px;border-radius:50%;border:1px solid rgba(0,0,0,.4)}
+.teinte[aria-pressed="true"]{box-shadow:0 0 0 2px var(--papier)}
+
+/* synchronisation */
+.bloc{border:1px solid var(--trait);border-radius:12px;padding:15px;margin-bottom:12px}
+.bloc h3{font-size:15px;margin-bottom:4px}
+.bloc p{font-size:12.5px;color:var(--papier-3);margin:0 0 12px;line-height:1.55}
+.bloc .actions{margin-top:0}
+.bloc .bouton{padding:11px;font-size:14px}
+.etat-synchro{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--papier-2);margin:0 0 16px}
+.voyant{width:8px;height:8px;border-radius:50%;flex:none;background:var(--papier-3)}
+.voyant.ok{background:var(--vif);box-shadow:0 0 9px -1px var(--vif)}
+.voyant.attente{background:#D9A62E;box-shadow:0 0 9px -1px #D9A62E}
+.voyant.erreur{background:var(--sceau);box-shadow:0 0 9px -1px var(--sceau)}
+details{border:1px solid var(--trait);border-radius:12px;padding:0;margin-bottom:12px}
+summary{padding:14px 15px;font-size:14px;color:var(--papier-2);cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--papier-3)}
+details[open] summary::after{content:"–"}
+details .corps-repli{padding:0 15px 15px}
+
+.voile{position:fixed;inset:0;z-index:30;background:rgba(5,8,7,.72);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .22s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.feuille{position:fixed;left:0;right:0;bottom:0;z-index:31;max-height:92vh;overflow-y:auto;
+  background:var(--panneau);border-radius:20px 20px 0 0;border-top:1px solid var(--trait-fort);
+  padding:8px var(--pad) calc(26px + env(safe-area-inset-bottom));
+  transform:translateY(101%);transition:transform .28s cubic-bezier(.3,.9,.3,1)}
+.feuille.ouvert{transform:translateY(0)}
+@media(min-width:680px){.feuille{max-width:640px;margin:0 auto}}
+.poignee{width:38px;height:4px;border-radius:2px;background:var(--trait-fort);margin:6px auto 16px}
+.feuille h2{font-size:22px;margin-bottom:2px}
+.feuille .chapeau{font-size:12.5px;color:var(--papier-3);margin:0 0 18px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .seg .fill{transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="entete">
+    <div>
+      <p class="sur-titre">Inventaire</p>
+      <h1 class="titre">La Cave</h1>
+    </div>
+    <div class="compte"><b id="stat-n">—</b><span>bouteilles</span></div>
+  </header>
+
+  <nav class="onglets" role="tablist">
+    <button class="onglet" role="tab" aria-selected="true" data-vue="cave">Cave</button>
+    <button class="onglet" role="tab" aria-selected="false" data-vue="saisie">Saisie<span class="point" id="point-modif" hidden></span></button>
+  </nav>
+
+  <!-- ============ VUE CAVE ============ -->
+  <div id="vue-cave" role="tabpanel">
+    <div class="spectre" id="spectre" role="group" aria-label="Répartition par cuvée — toucher pour filtrer"></div>
+    <ul class="legende" id="legende"></ul>
+    <p class="resume" id="resume"></p>
+
+    <section class="section">
+      <div class="section-tete">
+        <h2>Millésimes</h2><span class="trait"></span>
+        <span class="indice">toucher pour le détail</span>
+      </div>
+      <div id="millesimes"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-tete"><h2>Bouteilles</h2><span class="trait"></span><span class="indice">toucher pour modifier ou supprimer</span></div>
+      <div class="outils">
+        <div class="champ">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#E9E4D3" stroke-width="1.5"/><path d="M11 11l4 4" stroke="#E9E4D3" stroke-width="1.5"/></svg>
+          <input id="recherche" type="search" placeholder="Rechercher" aria-label="Rechercher">
+        </div>
+        <select class="tri" id="tri" aria-label="Trier">
+          <option value="cuvee">Cuvée</option>
+          <option value="millesime">Millésime ↓</option>
+          <option value="millesime-asc">Millésime ↑</option>
+          <option value="prix">Prix ↓</option>
+          <option value="volume">Volume ↓</option>
+        </select>
+      </div>
+      <ul class="liste" id="liste"></ul>
+    </section>
+  </div>
+
+  <!-- ============ VUE SAISIE ============ -->
+  <div id="vue-saisie" role="tabpanel" hidden>
+    <p class="etat-synchro"><span class="voyant" id="voyant"></span><span id="texte-synchro">Chargement…</span></p>
+
+    <section class="section" style="margin-top:8px">
+      <div class="section-tete"><h2>Ajouter une bouteille</h2><span class="trait"></span></div>
+      <div class="grille">
+        <div class="plein">
+          <label for="s-cuvee">Cuvée</label>
+          <select class="saisie" id="s-cuvee"></select>
+        </div>
+        <div class="plein" id="s-bloc-perso" hidden>
+          <label for="s-perso-nom">Nom de la nouvelle cuvée</label>
+          <input class="saisie" id="s-perso-nom" type="text" placeholder="Ex. Chartreuse Bleue">
+          <label style="margin-top:13px" for="s-perso-couleur">Couleur de la liqueur</label>
+          <div class="couleur-ligne">
+            <input type="color" class="pipette" id="s-perso-couleur" value="#B9BE35" aria-label="Couleur libre">
+            <div class="nuancier" id="s-nuancier"></div>
+          </div>
+          <p class="aide" style="margin-top:9px">La cuvée prend sa place dans le spectre d'après sa couleur.</p>
+        </div>
+        <div>
+          <label for="s-millesime">Millésime</label>
+          <input class="saisie" id="s-millesime" type="text" autocomplete="off" placeholder="2024">
+        </div>
+        <div>
+          <label for="s-prix">Prix d'achat</label>
+          <div class="avec-unite">
+            <input class="saisie" id="s-prix" type="number" inputmode="decimal" step="0.5" min="0" placeholder="—">
+            <span class="unite">€</span>
+          </div>
+        </div>
+        <p class="aide plein">Une année (2024) ou une fourchette (1972-1978).</p>
+        <div class="plein">
+          <label for="s-volume">Contenance</label>
+          <div class="avec-unite">
+            <input class="saisie" id="s-volume" type="number" inputmode="numeric" step="1" min="1" value="70">
+            <span class="unite">cl</span>
+          </div>
+          <div class="raccourcis" id="s-raccourcis"></div>
+        </div>
+        <div>
+          <label for="s-quantite">Quantité</label>
+          <input class="saisie" id="s-quantite" type="number" inputmode="numeric" min="1" max="99" value="1">
+        </div>
+        <div>
+          <label for="s-provenance">Offerte par</label>
+          <input class="saisie" id="s-provenance" type="text" placeholder="—">
+        </div>
+        <div class="plein">
+          <label for="s-commentaire">Commentaire</label>
+          <textarea class="saisie" id="s-commentaire" placeholder="Lieu d'achat, état de l'étiquette, occasion…"></textarea>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="bouton secondaire" id="s-vider">Vider</button>
+        <button class="bouton" id="s-ajouter">Ajouter à la cave</button>
+      </div>
+      <p class="confirmation" id="s-confirmation"></p>
+    </section>
+
+    <section class="section">
+      <div class="section-tete"><h2>Dernières saisies</h2><span class="trait"></span><span class="indice">toucher pour corriger</span></div>
+      <ul class="liste" id="recentes"></ul>
+    </section>
+
+    <section class="section">
+      <div class="section-tete"><h2>Dépôt</h2><span class="trait"></span></div>
+
+      <div class="bloc">
+        <h3>Enregistrement</h3>
+        <p id="d-explication">Chaque modification part dans <code id="d-chemin">cave.json</code> sur GitHub, quelques secondes après la saisie. Tous vos appareils lisent ce même fichier.</p>
+        <div class="actions">
+          <button class="bouton secondaire" id="d-recharger">Relire le dépôt</button>
+          <button class="bouton" id="d-enregistrer">Enregistrer maintenant</button>
+        </div>
+      </div>
+
+      <details id="d-reglages">
+        <summary>Réglages du dépôt et jeton d'accès</summary>
+        <div class="corps-repli">
+          <div class="grille">
+            <div>
+              <label for="c-owner">Compte</label>
+              <input class="saisie" id="c-owner" type="text" autocapitalize="off" autocorrect="off" spellcheck="false">
+            </div>
+            <div>
+              <label for="c-repo">Dépôt</label>
+              <input class="saisie" id="c-repo" type="text" autocapitalize="off" autocorrect="off" spellcheck="false">
+            </div>
+            <div>
+              <label for="c-branche">Branche</label>
+              <input class="saisie" id="c-branche" type="text" value="main" autocapitalize="off" spellcheck="false">
+            </div>
+            <div>
+              <label for="c-fichier">Fichier</label>
+              <input class="saisie" id="c-fichier" type="text" value="cave.json" autocapitalize="off" spellcheck="false">
+            </div>
+            <div class="plein">
+              <label for="c-jeton">Jeton d'accès GitHub</label>
+              <input class="saisie" id="c-jeton" type="password" autocomplete="off" placeholder="github_pat_…">
+              <p class="aide" style="margin-top:9px">Le jeton reste sur cet appareil, dans le stockage du navigateur — il n'est jamais écrit dans le dépôt. Sans jeton, l'appli reste consultable mais ne peut plus enregistrer. Créez-en un dans <b>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</b>, limité à ce seul dépôt, avec la permission <b>Contents : Read and write</b>.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="bouton secondaire" id="c-oublier">Oublier le jeton</button>
+            <button class="bouton" id="c-enregistrer-reglages">Enregistrer les réglages</button>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Sauvegarde hors ligne</summary>
+        <div class="corps-repli">
+          <p class="aide" style="margin-bottom:12px">Utile pour archiver la cave ou la reprendre sans jeton.</p>
+          <div class="actions" style="margin-top:0">
+            <button class="bouton secondaire" id="d-telecharger">Télécharger</button>
+            <button class="bouton secondaire" id="d-importer">Importer un fichier</button>
+          </div>
+          <input type="file" id="d-fichier" accept="application/json,.json" hidden>
+        </div>
+      </details>
+    </section>
+  </div>
+</div>
+
+<div class="voile" id="voile"></div>
+
+<section class="feuille" id="feuille-fiche" role="dialog" aria-modal="true" aria-labelledby="fiche-titre">
+  <div class="poignee"></div>
+  <h2 id="fiche-titre">Bouteille</h2>
+  <p class="chapeau">Modifiez ou retirez cette bouteille.</p>
+  <div class="grille">
+    <div class="plein">
+      <label for="f-cuvee">Cuvée</label>
+      <select class="saisie" id="f-cuvee"></select>
+    </div>
+    <div class="plein" id="f-bloc-couleur" hidden>
+      <label for="f-couleur">Couleur de cette cuvée</label>
+      <div class="couleur-ligne">
+        <input type="color" class="pipette" id="f-couleur" aria-label="Couleur de la cuvée">
+        <div class="nuancier" id="f-nuancier"></div>
+      </div>
+    </div>
+    <div>
+      <label for="f-millesime">Millésime</label>
+      <input class="saisie" id="f-millesime" type="text" autocomplete="off" placeholder="2024">
+    </div>
+    <div>
+      <label for="f-prix">Prix d'achat</label>
+      <div class="avec-unite">
+        <input class="saisie" id="f-prix" type="number" inputmode="decimal" step="0.5" min="0" placeholder="—">
+        <span class="unite">€</span>
+      </div>
+    </div>
+    <div>
+      <label for="f-volume">Contenance</label>
+      <div class="avec-unite">
+        <input class="saisie" id="f-volume" type="number" inputmode="numeric" step="1" min="1">
+        <span class="unite">cl</span>
+      </div>
+    </div>
+    <div>
+      <label for="f-provenance">Offerte par</label>
+      <input class="saisie" id="f-provenance" type="text" placeholder="—">
+    </div>
+    <div class="plein">
+      <label for="f-format">Libellé de contenance libre</label>
+      <input class="saisie" id="f-format" type="text" placeholder="—">
+    </div>
+    <div class="plein">
+      <label for="f-commentaire">Commentaire</label>
+      <textarea class="saisie" id="f-commentaire"></textarea>
+    </div>
+    <div class="plein">
+      <label>Statut</label>
+      <div class="etats" id="f-statut">
+        <button class="etat" data-statut="cave" aria-pressed="true">En cave</button>
+        <button class="etat" data-statut="bue" aria-pressed="false">Bue</button>
+        <button class="etat" data-statut="offerte" aria-pressed="false">Donnée</button>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="bouton danger" id="f-supprimer">Supprimer</button>
+    <button class="bouton secondaire" id="f-annuler">Annuler</button>
+    <button class="bouton" id="f-enregistrer">Enregistrer</button>
+  </div>
+</section>
+
+<!-- Copie de secours : sert uniquement si cave.json est injoignable. -->
+<script type="application/json" id="graine">{
+ "version": 2,
+ "cuvees": {},
+ "bouteilles": [
+  {"id": "b001", "cuvee": "rdl", "volume": 0.7, "millesime": "2021", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
+  {"id": "b002", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2022", "prix": 200.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b003", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2020", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
+  {"id": "b004", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 196.5, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b005", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 196.5, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b006", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 199.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b007", "cuvee": "mof", "volume": 0.7, "millesime": "2021", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
+  {"id": "b008", "cuvee": "mof", "volume": 3.0, "millesime": "2023", "prix": 325.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b009", "cuvee": "mof", "volume": 3.0, "millesime": "2022", "prix": 300.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b010", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b011", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b012", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b013", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b014", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b015", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b016", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b017", "cuvee": "jaune", "volume": 0.7, "millesime": "2022", "prix": 35.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b018", "cuvee": "jaune", "volume": 1.0, "millesime": "2016", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
+  {"id": "b019", "cuvee": "verte", "volume": 0.7, "millesime": "2017", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
+  {"id": "b020", "cuvee": "verte", "volume": 0.7, "millesime": "2022", "prix": 37.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b021", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b022", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b023", "cuvee": "mof", "volume": 0.7, "millesime": "2021", "prix": 59.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b024", "cuvee": "mof", "volume": 0.7, "millesime": "2021", "prix": 59.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b025", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b026", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b027", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b028", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 95.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b029", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b030", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b031", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 89.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b032", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": null, "provenance": "Parents", "commentaire": "", "statut": "cave"},
+  {"id": "b033", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b034", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b035", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b036", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b037", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b038", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b039", "cuvee": "rdl", "volume": 0.7, "millesime": "2023", "prix": 300.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b040", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2023", "prix": 300.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b041", "cuvee": "mof", "volume": 0.7, "millesime": "2025", "prix": 58.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b042", "cuvee": "verte", "volume": 0.7, "millesime": "2025", "prix": 42.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b043", "cuvee": "coffret", "volume": 0.18, "format": "coffret 6 × 3 cl", "millesime": "2025", "prix": 25.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b044", "cuvee": "mof", "volume": 0.7, "millesime": "2024", "prix": 70.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b045", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b046", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b047", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b048", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "provenance": "", "commentaire": "", "statut": "cave"},
+  {"id": "b049", "cuvee": "tau", "volume": 0.7, "millesime": "2023", "prix": 115.0, "provenance": "", "commentaire": "", "statut": "cave"}
+ ]
+}</script>
+
+<script>
+"use strict";
+
+/* ===== catalogue des cuvées =====================================
+   Verts : Verte, V.E.P. Verte. Jaunes : Jaune, V.E.P. Jaune, Reine des Liqueurs.
+   Mélanges vert-jaune : M.O.F., 9e Centenaire, Tau. Bleu : coffret.
+   Les cuvées ajoutées depuis l'appli vivent dans cave.json.            */
+const CUVEES_BASE = {
+  "elixir":     {nom:"Élixir Végétal",      c:"#2C4A1C", ordre:0},
+  "vep-verte":  {nom:"V.E.P. Verte",        c:"#35762B", ordre:1},
+  "1605":       {nom:"Liqueur du 1605",     c:"#4F9A31", ordre:2},
+  "verte":      {nom:"Chartreuse Verte",    c:"#6BC13F", ordre:3},
+  "mof":        {nom:"Cuvée des M.O.F.",    c:"#8CA82E", ordre:4},
+  "centenaire": {nom:"9e Centenaire",       c:"#B9BE35", ordre:5},
+  "tau":        {nom:"La Tau",              c:"#C6B441", ordre:6},
+  "genepi":     {nom:"Génépi des Pères",    c:"#E4DFA0", ordre:7},
+  "jaune":      {nom:"Chartreuse Jaune",    c:"#F7CB3C", ordre:8},
+  "rdl":        {nom:"Reine des Liqueurs",  c:"#D99C1F", ordre:9},
+  "vep-jaune":  {nom:"V.E.P. Jaune",        c:"#A87016", ordre:10},
+  "tarragone":  {nom:"Tarragone",           c:"#7A5416", ordre:11},
+  "coffret":    {nom:"Coffret dégustation", c:"#3E7FA8", ordre:12},
+  "autre":      {nom:"Autre",               c:"#7C8478", ordre:13}
+};
+const NUANCIER = ["#35762B","#4F9A31","#6BC13F","#8CA82E","#B9BE35","#C6B441",
+                  "#F7CB3C","#D99C1F","#A87016","#3E7FA8","#7C8478"];
+const RACCOURCIS_CL = [3, 20, 35, 50, 70, 100, 150, 300];
+
+let cuveesPerso = {};
+const info = k => CUVEES_BASE[k] || cuveesPerso[k] || CUVEES_BASE.autre;
+const toutesCuvees = () => ({...CUVEES_BASE, ...cuveesPerso});
+
+/* place dans le spectre déduite de la teinte : vert → début, ambre → fin */
+function ordreDepuisCouleur(hex){
+  const {h, s} = tsl(hex);
+  if(s < 0.14) return 13.4;
+  if(h >= 160 && h <= 300) return 12.5;
+  if(h > 300 || h < 18) return 12.9;
+  return 11.5 - Math.min(1, (h - 18) / 132) * 11;
+}
+function tsl(hex){
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16 & 255)/255, g = (n >> 8 & 255)/255, b = (n & 255)/255;
+  const mx = Math.max(r,g,b), mn = Math.min(r,g,b), d = mx - mn;
+  let h = 0;
+  if(d){
+    if(mx === r) h = ((g - b)/d) % 6;
+    else if(mx === g) h = (b - r)/d + 2;
+    else h = (r - g)/d + 4;
+    h *= 60; if(h < 0) h += 360;
+  }
+  return {h, s: mx ? d/mx : 0};
+}
+function slug(nom){
+  const base = "perso-" + nom.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40) || "perso-cuvee";
+  let k = base, i = 2;
+  while(CUVEES_BASE[k]) k = base + "-" + (i++);
+  return k;
+}
+
+/* ===== utilitaires ===== */
+const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const euro = n => new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n);
+const litres = n => n.toLocaleString("fr-FR",{maximumFractionDigits:1}) + " L";
+const $ = id => document.getElementById(id);
+
+function normMillesime(t){
+  const s = String(t ?? "").trim();
+  if(!s) return null;
+  let m = s.match(/^(\d{4})\s*[-–—/]\s*(\d{2,4})$/);
+  if(m) return m[1] + "-" + (m[2].length === 2 ? m[1].slice(0,2) + m[2] : m[2]);
+  m = s.match(/^(\d{4})$/);
+  return m ? m[1] : s;
+}
+const anTri = m => { const x = String(m ?? "").match(/\d{4}/); return x ? +x[0] : 0; };
+const anLabel = m => (m === null || m === undefined || m === "") ? "sans date" : String(m);
+
+function volLabel(b){
+  if(b.format) return b.format;
+  const cl = Math.round(Number(b.volume) * 100);
+  if(cl === 300) return "Jéroboam 3 L";
+  if(cl === 150) return "Magnum 1,5 L";
+  if(cl >= 100) return (cl/100).toLocaleString("fr-FR") + " L";
+  return cl + " cl";
+}
+const nomCuvee = b => info(b.cuvee).nom;
+
+/* ===== stockage local (tampon) ===== */
+const memoire = {};
+const local = {
+  lire(c){ try{ return localStorage.getItem(c); }catch(e){ return memoire[c] ?? null; } },
+  ecrire(c,v){ memoire[c] = v; try{ localStorage.setItem(c,v); }catch(e){} },
+  vider(c){ delete memoire[c]; try{ localStorage.removeItem(c); }catch(e){} }
+};
+const CLE_CAVE = "cave-chartreuse-v2", CLE_CFG = "cave-config-v1", CLE_JETON = "cave-jeton-v1";
+
+/* ===== état ===== */
+let cave = [], empreintePubliee = "", shaDistant = null;
+let filtre = null, edition = null, statutSaisi = "cave", minuteur = null;
+let cfg = {owner:"", repo:"", branche:"main", chemin:"cave.json"};
+let jeton = "";
+
+const cuveesUtiles = () => {
+  const u = new Set(cave.map(b => b.cuvee)), o = {};
+  Object.keys(cuveesPerso).sort().forEach(k => { if(u.has(k)) o[k] = cuveesPerso[k]; });
+  return o;
+};
+const empreinte = () => JSON.stringify([cuveesUtiles(), cave]);
+const modifie = () => empreinte() !== empreintePubliee;
+const paquet = () => JSON.stringify({version:2, maj:new Date().toISOString().slice(0,10),
+                                     cuvees:cuveesUtiles(), bouteilles:cave}, null, 1);
+
+/* ===== dépôt GitHub ===== */
+function depotParDefaut(){
+  const h = location.hostname.match(/^([^.]+)\.github\.io$/i);
+  const seg = location.pathname.split("/").filter(Boolean);
+  const owner = h ? h[1] : "";
+  const repo = h ? (seg.length ? seg[0] : h[1] + ".github.io") : "";
+  return {owner, repo, branche:"main", chemin:"cave.json"};
+}
+const enTetes = () => {
+  const e = {"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+  if(jeton) e.Authorization = "Bearer " + jeton;
+  return e;
+};
+const urlContenu = () =>
+  `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.chemin}`;
+
+const b64 = s => {
+  const o = new TextEncoder().encode(s);
+  let bin = "";
+  for(let i = 0; i < o.length; i += 0x8000) bin += String.fromCharCode(...o.subarray(i, i+0x8000));
+  return btoa(bin);
+};
+const deB64 = s => new TextDecoder().decode(
+  Uint8Array.from(atob(String(s).replace(/\s/g,"")), c => c.charCodeAt(0)));
+
+function voyant(classe, texte){
+  $("voyant").className = "voyant " + classe;
+  $("texte-synchro").textContent = texte;
+}
+
+async function lireDepot(){
+  if(!cfg.owner || !cfg.repo) return null;
+  try{
+    const r = await fetch(`${urlContenu()}?ref=${encodeURIComponent(cfg.branche)}`,
+      {headers: enTetes(), cache:"no-store"});
+    if(r.status === 404){ shaDistant = null; return null; }
+    if(!r.ok) throw new Error(r.status === 401 || r.status === 403
+      ? "jeton refusé par GitHub" : "GitHub a répondu " + r.status);
+    const j = await r.json();
+    shaDistant = j.sha;
+    return JSON.parse(deB64(j.content));
+  }catch(e){
+    if(jeton) voyant("erreur", "Lecture impossible : " + e.message);
+    return null;
+  }
+}
+
+async function ecrireDepot(manuel){
+  if(!jeton){ voyant("attente", "Modifications locales — ajoutez un jeton pour les enregistrer."); return; }
+  if(!cfg.owner || !cfg.repo){ voyant("erreur", "Compte ou dépôt non renseigné."); return; }
+  if(!modifie() && !manuel){ return; }
+  voyant("attente", "Enregistrement…");
+  try{
+    const corps = {message:`Cave : ${cave.length} bouteilles`, content:b64(paquet()), branch:cfg.branche};
+    if(shaDistant) corps.sha = shaDistant;
+    const r = await fetch(urlContenu(), {method:"PUT", headers:{...enTetes(), "Content-Type":"application/json"},
+      body: JSON.stringify(corps)});
+    if(r.status === 409 || r.status === 422){
+      voyant("erreur", "La cave a changé depuis un autre appareil. Touchez « Relire le dépôt ».");
+      return;
+    }
+    if(!r.ok){
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.message || "GitHub a répondu " + r.status);
+    }
+    const j = await r.json();
+    shaDistant = j.content.sha;
+    empreintePubliee = empreinte();
+    local.vider(CLE_CAVE);
+    rendre();
+    voyant("ok", "Enregistré dans le dépôt à " + new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}) + ".");
+  }catch(e){
+    voyant("erreur", "Échec de l'enregistrement : " + e.message);
+  }
+}
+
+function planifier(){
+  clearTimeout(minuteur);
+  if(!jeton){ majVoyant(); return; }
+  voyant("attente", "Enregistrement dans quelques secondes…");
+  minuteur = setTimeout(() => ecrireDepot(false), 2500);
+}
+function majVoyant(){
+  if(!modifie()){ voyant("ok", jeton ? "À jour avec le dépôt." : "À jour avec le dépôt (lecture seule)."); return; }
+  voyant(jeton ? "attente" : "erreur",
+    jeton ? "Modifications en attente d'enregistrement." : "Modifications gardées sur cet appareil — ajoutez un jeton pour les publier.");
+}
+
+/* ===== démarrage ===== */
+async function demarrer(){
+  try{ Object.assign(cfg, JSON.parse(local.lire(CLE_CFG) || "null") || depotParDefaut()); }
+  catch(e){ Object.assign(cfg, depotParDefaut()); }
+  jeton = local.lire(CLE_JETON) || "";
+  ["owner","repo","branche","chemin"].forEach((k,i) =>
+    $(["c-owner","c-repo","c-branche","c-fichier"][i]).value = cfg[k]);
+  $("c-jeton").value = jeton;
+  $("d-chemin").textContent = cfg.chemin;
+
+  let source = await lireDepot();
+  if(!source){
+    try{
+      const r = await fetch(cfg.chemin + "?t=" + Date.now(), {cache:"no-store"});
+      if(r.ok) source = await r.json();
+    }catch(e){}
+  }
+  if(!source){
+    try{ source = JSON.parse($("graine").textContent); }catch(e){ source = {bouteilles:[], cuvees:{}}; }
+  }
+  cuveesPerso = source.cuvees || {};
+  cave = (source.bouteilles || []).map(b => ({...b}));
+  empreintePubliee = empreinte();
+
+  const tampon = local.lire(CLE_CAVE);
+  if(tampon){
+    try{
+      const t = JSON.parse(tampon);
+      if(Array.isArray(t.bouteilles)){ cave = t.bouteilles; cuveesPerso = {...cuveesPerso, ...(t.cuvees||{})}; }
+    }catch(e){}
+  }
+  remplirSelects();
+  rendre();
+  majVoyant();
+  if(modifie() && jeton) planifier();
+}
+
+function toucher(){
+  local.ecrire(CLE_CAVE, JSON.stringify({cuvees:cuveesUtiles(), bouteilles:cave}));
+  remplirSelects();
+  rendre();
+  planifier();
+}
+
+/* ===== rendu ===== */
+function rendre(){
+  const enCave = cave.filter(b => b.statut === "cave");
+  $("stat-n").textContent = enCave.length;
+  $("point-modif").hidden = !modifie();
+
+  const volume = enCave.reduce((s,b) => s + Number(b.volume||0), 0);
+  const valeur = enCave.reduce((s,b) => s + Number(b.prix||0), 0);
+  const nbCuvees = new Set(enCave.map(b => b.cuvee)).size;
+  $("resume").innerHTML = `<b>${nbCuvees}</b> cuvées · <b>${litres(volume)}</b> · <b>${euro(valeur)}</b> à l'achat`;
+
+  rendreSpectre(enCave);
+  rendreMillesimes(enCave);
+  rendreListe();
+  rendreRecentes();
+}
+
+function rendreSpectre(enCave){
+  const comptes = {};
+  enCave.forEach(b => comptes[b.cuvee] = (comptes[b.cuvee]||0) + 1);
+  const cles = Object.keys(comptes).sort((a,b) => info(a).ordre - info(b).ordre);
+
+  const sp = $("spectre");
+  sp.innerHTML = "";
+  sp.classList.toggle("filtre", filtre !== null);
+  cles.forEach((k,i) => {
+    const el = document.createElement("button");
+    el.className = "seg" + (filtre === k ? " actif" : "");
+    el.style.flex = comptes[k];
+    el.setAttribute("aria-label", `${info(k).nom} — ${comptes[k]} bouteilles`);
+    el.innerHTML = `<span class="fill" style="background:${info(k).c};animation-delay:${i*55}ms"></span>`;
+    el.onclick = () => { filtre = (filtre === k ? null : k); rendre(); };
+    sp.appendChild(el);
+  });
+
+  const lg = $("legende");
+  lg.innerHTML = "";
+  cles.forEach(k => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button class="leg" aria-pressed="${filtre===k}">
+        <span class="pastille" style="background:${info(k).c};color:${info(k).c}"></span>
+        <span class="nom">${esc(info(k).nom)}</span><span class="n">${comptes[k]}</span></button>`;
+    li.querySelector("button").onclick = () => { filtre = (filtre === k ? null : k); rendre(); };
+    lg.appendChild(li);
+  });
+}
+
+function rendreMillesimes(enCave){
+  const par = {};
+  enCave.forEach(b => { const k = anLabel(b.millesime); (par[k] = par[k] || []).push(b); });
+  const cles = Object.keys(par).sort((a,b) => anTri(b) - anTri(a) || a.localeCompare(b));
+  const max = Math.max(1, ...cles.map(k => par[k].length));
+
+  const hote = $("millesimes");
+  const ouverts = new Set([...hote.querySelectorAll(".an")]
+    .filter(e => !e.querySelector(".an-detail").hidden).map(e => e.dataset.an));
+  hote.innerHTML = "";
+
+  cles.forEach(k => {
+    const lot = par[k], comptes = {};
+    lot.forEach(b => comptes[b.cuvee] = (comptes[b.cuvee]||0) + 1);
+    const parts = Object.keys(comptes).sort((a,b) => info(a).ordre - info(b).ordre);
+
+    const div = document.createElement("div");
+    div.className = "an" + (filtre ? " filtre" : "");
+    div.dataset.an = k;
+    div.innerHTML = `
+      <button class="an-tete" aria-expanded="${ouverts.has(k)}">
+        <span class="an-nom">${esc(k)}</span>
+        <span class="an-piste"><span class="an-barre" style="width:${lot.length/max*100}%">${
+          parts.map(c => `<i class="${c === filtre ? "actif" : ""}" style="flex:${comptes[c]};background:${info(c).c}"></i>`).join("")
+        }</span></span>
+        <span class="an-n">${lot.length}</span>
+      </button>
+      <div class="an-detail" ${ouverts.has(k) ? "" : "hidden"}>${
+        parts.map(c => `${esc(info(c).nom)} <b>${comptes[c]}</b>`).join(" · ")
+      }</div>`;
+    const detail = div.querySelector(".an-detail");
+    div.querySelector(".an-tete").onclick = e => {
+      detail.hidden = !detail.hidden;
+      e.currentTarget.setAttribute("aria-expanded", String(!detail.hidden));
+    };
+    hote.appendChild(div);
+  });
+}
+
+function rendreListe(){
+  const q = $("recherche").value.trim().toLowerCase();
+  const tri = $("tri").value;
+  let vues = cave.filter(b => {
+    if(filtre && b.cuvee !== filtre) return false;
+    if(!q) return true;
+    return [nomCuvee(b), b.millesime, b.prix, b.provenance, b.commentaire, volLabel(b)]
+      .join(" ").toLowerCase().includes(q);
+  });
+
+  const parCuvee = (a,b) => info(a.cuvee).ordre - info(b.cuvee).ordre || anTri(b.millesime) - anTri(a.millesime);
+  const tris = {
+    "cuvee": parCuvee,
+    "millesime": (a,b) => anTri(b.millesime) - anTri(a.millesime) || parCuvee(a,b),
+    "millesime-asc": (a,b) => (anTri(a.millesime)||9999) - (anTri(b.millesime)||9999) || parCuvee(a,b),
+    "prix": (a,b) => (b.prix||0) - (a.prix||0),
+    "volume": (a,b) => (b.volume||0) - (a.volume||0) || parCuvee(a,b)
+  };
+  vues = vues.sort(tris[tri]);
+
+  const liste = $("liste");
+  liste.innerHTML = "";
+  if(!vues.length){
+    liste.innerHTML = `<li class="vide">Aucune bouteille ne correspond.<br>Modifiez la recherche, ou touchez à nouveau la couleur pour tout réafficher.</li>`;
+    return;
+  }
+  let groupe = null;
+  vues.forEach(b => {
+    if(tri === "cuvee" && b.cuvee !== groupe){
+      groupe = b.cuvee;
+      const n = vues.filter(x => x.cuvee === groupe).length;
+      const li = document.createElement("li");
+      li.className = "groupe";
+      li.innerHTML = `<h3>${esc(info(groupe).nom)}</h3><span class="trait"></span><span class="n">${n}</span>`;
+      liste.appendChild(li);
+    }
+    liste.appendChild(ligne(b));
+  });
+}
+
+function rendreRecentes(){
+  const r = $("recentes");
+  r.innerHTML = "";
+  const d = cave.slice(-6).reverse();
+  if(!d.length){ r.innerHTML = `<li class="vide">La cave est vide.</li>`; return; }
+  d.forEach(b => r.appendChild(ligne(b)));
+}
+
+function ligne(b){
+  const li = document.createElement("li");
+  const bits = [];
+  if(b.millesime) bits.push(esc(b.millesime));
+  bits.push(volLabel(b));
+  if(b.prix) bits.push(euro(b.prix));
+  else if(b.provenance) bits.push(`<span class="don">offerte par ${esc(b.provenance)}</span>`);
+  if(b.commentaire) bits.push(`<span class="don">${esc(b.commentaire)}</span>`);
+  const c = info(b.cuvee).c;
+  li.innerHTML = `<button class="ligne${b.statut !== "cave" ? " hors" : ""}">
+      <span class="verre" style="background:${c};color:${c}"></span>
+      <span class="corps">
+        <span class="cuvee">${esc(nomCuvee(b))}</span>
+        <span class="meta">${bits.join('<span class="sep">·</span>')}</span>
+      </span></button>`;
+  li.querySelector("button").onclick = () => ouvrirFiche(b.id);
+  return li;
+}
+
+/* ===== onglets ===== */
+document.querySelectorAll(".onglet").forEach(o => o.onclick = () => {
+  document.querySelectorAll(".onglet").forEach(x => x.setAttribute("aria-selected", String(x === o)));
+  $("vue-cave").hidden = o.dataset.vue !== "cave";
+  $("vue-saisie").hidden = o.dataset.vue !== "saisie";
+  window.scrollTo(0, 0);
+});
+
+/* ===== nuanciers ===== */
+function monterNuancier(hote, pipette, surChangement){
+  hote.innerHTML = "";
+  NUANCIER.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "teinte"; b.type = "button"; b.style.background = c;
+    b.setAttribute("aria-label", "Teinte " + c);
+    b.onclick = () => { pipette.value = c; marquer(); surChangement && surChangement(c); };
+    hote.appendChild(b);
+  });
+  const marquer = () => [...hote.children].forEach((b,i) =>
+    b.setAttribute("aria-pressed", String(NUANCIER[i].toLowerCase() === pipette.value.toLowerCase())));
+  pipette.addEventListener("input", () => { marquer(); surChangement && surChangement(pipette.value); });
+  marquer();
+}
+monterNuancier($("s-nuancier"), $("s-perso-couleur"));
+
+/* ===== listes déroulantes de cuvées ===== */
+function remplirSelects(){
+  const cat = toutesCuvees();
+  const cles = Object.keys(cat).sort((a,b) => cat[a].ordre - cat[b].ordre);
+  [["s-cuvee", true], ["f-cuvee", false]].forEach(([id, avecNouvelle]) => {
+    const sel = $(id), avant = sel.value;
+    sel.innerHTML = "";
+    cles.forEach(k => {
+      const o = document.createElement("option");
+      o.value = k; o.textContent = cat[k].nom;
+      sel.appendChild(o);
+    });
+    if(avecNouvelle){
+      const o = document.createElement("option");
+      o.value = "__nouvelle"; o.textContent = "＋ Nouvelle cuvée…";
+      sel.appendChild(o);
+    }
+    if(avant && [...sel.options].some(o => o.value === avant)) sel.value = avant;
+  });
+}
+$("s-cuvee").onchange = () => { $("s-bloc-perso").hidden = $("s-cuvee").value !== "__nouvelle"; };
+$("f-cuvee").onchange = majCouleurFiche;
+
+/* ===== raccourcis de contenance ===== */
+const rac = $("s-raccourcis");
+RACCOURCIS_CL.forEach(cl => {
+  const b = document.createElement("button");
+  b.className = "raccourci"; b.type = "button";
+  b.textContent = cl >= 100 ? (cl/100).toLocaleString("fr-FR") + " L" : cl + " cl";
+  b.onclick = () => { $("s-volume").value = cl; majRaccourcis(); };
+  rac.appendChild(b);
+});
+function majRaccourcis(){
+  const v = Number($("s-volume").value);
+  [...rac.children].forEach((b,i) => b.setAttribute("aria-pressed", String(RACCOURCIS_CL[i] === v)));
+}
+$("s-volume").oninput = majRaccourcis;
+majRaccourcis();
+
+/* ===== ajout ===== */
+$("s-ajouter").onclick = () => {
+  const v = id => $(id).value.trim();
+  const n = Math.max(1, Math.min(99, Number(v("s-quantite")) || 1));
+  const cl = Number(v("s-volume"));
+  if(!cl){ $("s-confirmation").textContent = "Indiquez une contenance en centilitres."; return; }
+
+  let cle = v("s-cuvee");
+  if(cle === "__nouvelle"){
+    const nom = v("s-perso-nom");
+    if(!nom){ $("s-confirmation").textContent = "Donnez un nom à la nouvelle cuvée."; return; }
+    const couleur = $("s-perso-couleur").value;
+    const existante = Object.keys(cuveesPerso).find(k =>
+      cuveesPerso[k].nom.toLowerCase() === nom.toLowerCase());
+    cle = existante || slug(nom);
+    cuveesPerso[cle] = {nom, c:couleur, ordre:ordreDepuisCouleur(couleur)};
+  }
+
+  const mil = normMillesime(v("s-millesime"));
+  const modele = {
+    cuvee: cle, volume: cl/100, millesime: mil,
+    prix: v("s-prix") ? Number(v("s-prix")) : null,
+    provenance: v("s-provenance"), commentaire: v("s-commentaire"), statut:"cave"
+  };
+  for(let i = 0; i < n; i++) cave.push({...modele, id:"b" + Date.now().toString(36) + i.toString(36)});
+
+  $("s-confirmation").innerHTML =
+    `${n > 1 ? n + " × " : ""}<b>${esc(info(cle).nom)}</b> ${mil ? esc(mil) + " " : ""}· ${volLabel(modele)} ajoutée${n > 1 ? "s" : ""}.`;
+  $("s-quantite").value = 1;
+  $("s-commentaire").value = "";
+  $("s-perso-nom").value = "";
+  toucher();
+  $("s-cuvee").value = cle;
+  $("s-bloc-perso").hidden = true;
+};
+$("s-vider").onclick = () => {
+  ["s-millesime","s-prix","s-provenance","s-commentaire","s-perso-nom"].forEach(i => $(i).value = "");
+  $("s-quantite").value = 1; $("s-volume").value = 70; majRaccourcis();
+  $("s-confirmation").textContent = "";
+};
+
+/* ===== fiche ===== */
+const voile = $("voile");
+function ouvrir(el){ voile.classList.add("ouvert"); el.classList.add("ouvert"); }
+function toutFermer(){
+  voile.classList.remove("ouvert");
+  document.querySelectorAll(".feuille").forEach(f => f.classList.remove("ouvert"));
+  armeSuppression(false);
+}
+voile.onclick = toutFermer;
+document.addEventListener("keydown", e => { if(e.key === "Escape") toutFermer(); });
+
+function majCouleurFiche(){
+  const k = $("f-cuvee").value;
+  const perso = !!cuveesPerso[k];
+  $("f-bloc-couleur").hidden = !perso;
+  if(perso) $("f-couleur").value = cuveesPerso[k].c;
+}
+monterNuancier($("f-nuancier"), $("f-couleur"), c => {
+  const k = $("f-cuvee").value;
+  if(cuveesPerso[k]){ cuveesPerso[k].c = c; cuveesPerso[k].ordre = ordreDepuisCouleur(c); }
+});
+
+function ouvrirFiche(id){
+  edition = id;
+  const b = cave.find(x => x.id === id);
+  if(!b) return;
+  $("fiche-titre").textContent = nomCuvee(b);
+  $("f-cuvee").value = b.cuvee;
+  majCouleurFiche();
+  $("f-millesime").value = b.millesime ?? "";
+  $("f-volume").value = Math.round(Number(b.volume) * 100);
+  $("f-prix").value = b.prix ?? "";
+  $("f-provenance").value = b.provenance || "";
+  $("f-format").value = b.format || "";
+  $("f-commentaire").value = b.commentaire || "";
+  majStatut(b.statut || "cave");
+  ouvrir($("feuille-fiche"));
+}
+function majStatut(s){
+  statutSaisi = s;
+  document.querySelectorAll("#f-statut .etat").forEach(el =>
+    el.setAttribute("aria-pressed", String(el.dataset.statut === s)));
+}
+document.querySelectorAll("#f-statut .etat").forEach(el => el.onclick = () => majStatut(el.dataset.statut));
+
+$("f-enregistrer").onclick = () => {
+  const v = id => $(id).value.trim();
+  const i = cave.findIndex(x => x.id === edition);
+  if(i < 0) return toutFermer();
+  cave[i] = {
+    ...cave[i],
+    cuvee: v("f-cuvee"),
+    volume: Number(v("f-volume"))/100,
+    millesime: normMillesime(v("f-millesime")),
+    prix: v("f-prix") ? Number(v("f-prix")) : null,
+    provenance: v("f-provenance"),
+    format: v("f-format"),
+    commentaire: v("f-commentaire"),
+    statut: statutSaisi
+  };
+  if(!cave[i].format) delete cave[i].format;
+  toutFermer();
+  toucher();
+};
+$("f-annuler").onclick = toutFermer;
+
+let arme = false;
+function armeSuppression(v){
+  arme = v;
+  const b = $("f-supprimer");
+  b.classList.toggle("arme", v);
+  b.textContent = v ? "Confirmer" : "Supprimer";
+}
+$("f-supprimer").onclick = () => {
+  if(!arme){ armeSuppression(true); return; }
+  cave = cave.filter(x => x.id !== edition);
+  toutFermer();
+  toucher();
+};
+
+/* ===== dépôt : commandes ===== */
+$("d-enregistrer").onclick = () => { clearTimeout(minuteur); ecrireDepot(true); };
+function adopter(s){
+  cuveesPerso = s.cuvees || {};
+  cave = (s.bouteilles || []).map(b => ({...b}));
+  empreintePubliee = empreinte();
+  local.vider(CLE_CAVE);
+  clearTimeout(minuteur);
+  remplirSelects();
+  rendre();
+}
+$("d-recharger").onclick = async () => {
+  voyant("attente", "Lecture du dépôt…");
+  let s = await lireDepot();
+  if(!s){
+    try{ const r = await fetch(cfg.chemin + "?t=" + Date.now(), {cache:"no-store"}); if(r.ok) s = await r.json(); }
+    catch(e){}
+  }
+  if(!s){ voyant("erreur", "Dépôt injoignable."); return; }
+  adopter(s);
+  voyant("ok", "Cave relue depuis le dépôt.");
+};
+$("c-enregistrer-reglages").onclick = async () => {
+  cfg = {owner:$("c-owner").value.trim(), repo:$("c-repo").value.trim(),
+         branche:$("c-branche").value.trim() || "main", chemin:$("c-fichier").value.trim() || "cave.json"};
+  jeton = $("c-jeton").value.trim();
+  local.ecrire(CLE_CFG, JSON.stringify(cfg));
+  if(jeton) local.ecrire(CLE_JETON, jeton); else local.vider(CLE_JETON);
+  $("d-chemin").textContent = cfg.chemin;
+  $("d-reglages").open = false;
+  shaDistant = null;
+  const s = await lireDepot();
+  if(s && !modifie()){ adopter(s); voyant("ok", "Cave reprise depuis le dépôt."); }
+  else if(jeton) await ecrireDepot(true);
+  else majVoyant();
+};
+$("c-oublier").onclick = () => {
+  jeton = ""; $("c-jeton").value = "";
+  local.vider(CLE_JETON);
+  majVoyant();
+};
+$("d-telecharger").onclick = () => {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([paquet()], {type:"application/json"}));
+  a.download = "cave.json"; a.click();
+  URL.revokeObjectURL(a.href);
+};
+$("d-importer").onclick = () => $("d-fichier").click();
+$("d-fichier").onchange = e => {
+  const f = e.target.files[0];
+  if(!f) return;
+  const l = new FileReader();
+  l.onload = () => {
+    try{
+      const j = JSON.parse(l.result);
+      if(!Array.isArray(j.bouteilles)) throw 0;
+      cave = j.bouteilles;
+      cuveesPerso = j.cuvees || {};
+      toucher();
+    }catch(err){ alert("Ce fichier n'est pas un cave.json valide."); }
+  };
+  l.readAsText(f);
+};
+
+$("recherche").oninput = rendreListe;
+$("tri").onchange = rendreListe;
+
+demarrer();
+</script>
+</body>
+</html>
