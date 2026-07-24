@@ -1,57 +1,473 @@
 {
  "version": 2,
- "cuvees": {"perso-anisette": {"nom": "Anisette", "c": "#D9D3BE", "ordre": 13.4}},
+ "maj": "2026-07-24",
+ "cuvees": {
+  "perso-anisette": {
+   "nom": "Anisette",
+   "c": "#D9D3BE",
+   "ordre": 13.4
+  }
+ },
  "bouteilles": [
-  {"id": "b001", "cuvee": "rdl", "volume": 0.7, "millesime": "2021", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b002", "cuvee": "rdl", "volume": 0.7, "millesime": "2023", "prix": 300.0, "commentaire": "", "statut": "cave"},
-  {"id": "b003", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2022", "prix": 300.0, "commentaire": "", "statut": "cave"},
-  {"id": "b004", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2023", "prix": 200.0, "commentaire": "", "statut": "cave"},
-  {"id": "b005", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2020", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b006", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 200.0, "commentaire": "", "statut": "cave"},
-  {"id": "b007", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 200.0, "commentaire": "", "statut": "cave"},
-  {"id": "b008", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 200.0, "commentaire": "", "statut": "cave"},
-  {"id": "b009", "cuvee": "centenaire", "volume": 0.7, "millesime": "2020", "prix": 80.0, "commentaire": "", "statut": "cave"},
-  {"id": "b010", "cuvee": "centenaire", "volume": 0.7, "millesime": "2020", "prix": 80.0, "commentaire": "", "statut": "cave"},
-  {"id": "b011", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "commentaire": "", "statut": "cave"},
-  {"id": "b012", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "commentaire": "", "statut": "cave"},
-  {"id": "b013", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 60.0, "commentaire": "", "statut": "cave"},
-  {"id": "b014", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b015", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b016", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b017", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b018", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b019", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "commentaire": "", "statut": "cave"},
-  {"id": "b020", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "commentaire": "", "statut": "cave"},
-  {"id": "b021", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "commentaire": "", "statut": "cave"},
-  {"id": "b022", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "commentaire": "", "statut": "cave"},
-  {"id": "b023", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "commentaire": "", "statut": "cave"},
-  {"id": "b024", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "commentaire": "", "statut": "cave"},
-  {"id": "b025", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 95.0, "commentaire": "", "statut": "cave"},
-  {"id": "b026", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b027", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 89.0, "commentaire": "", "statut": "cave"},
-  {"id": "b028", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b029", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "commentaire": "", "statut": "cave"},
-  {"id": "b030", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b031", "cuvee": "centenaire", "volume": 0.7, "millesime": "2025", "prix": 95.0, "commentaire": "", "statut": "cave"},
-  {"id": "b032", "cuvee": "centenaire", "volume": 0.7, "millesime": "2025", "prix": 95.0, "commentaire": "", "statut": "cave"},
-  {"id": "b033", "cuvee": "centenaire", "volume": 0.7, "millesime": "2025", "prix": 95.0, "commentaire": "", "statut": "cave"},
-  {"id": "b034", "cuvee": "centenaire", "volume": 0.7, "millesime": "2026", "prix": 95.0, "commentaire": "", "statut": "cave"},
-  {"id": "b035", "cuvee": "centenaire", "volume": 0.7, "millesime": "2026", "prix": 95.0, "commentaire": "", "statut": "cave"},
-  {"id": "b036", "cuvee": "mof", "volume": 3.0, "millesime": "2023", "prix": 325.0, "commentaire": "", "statut": "cave"},
-  {"id": "b037", "cuvee": "mof", "volume": 3.0, "millesime": "2022", "prix": 300.0, "commentaire": "", "statut": "cave"},
-  {"id": "b038", "cuvee": "mof", "volume": 0.7, "millesime": "2022", "prix": 58.0, "commentaire": "", "statut": "cave"},
-  {"id": "b039", "cuvee": "mof", "volume": 0.7, "millesime": "2022", "prix": 58.0, "commentaire": "", "statut": "cave"},
-  {"id": "b040", "cuvee": "mof", "volume": 0.7, "millesime": "2025", "prix": 59.0, "commentaire": "", "statut": "cave"},
-  {"id": "b041", "cuvee": "mof", "volume": 0.7, "millesime": "2025", "prix": 70.0, "commentaire": "", "statut": "cave"},
-  {"id": "b042", "cuvee": "jaune", "volume": 1.0, "millesime": "2016", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b043", "cuvee": "verte", "volume": 0.7, "millesime": "2017", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b044", "cuvee": "tau", "volume": 0.7, "millesime": "2023", "prix": 115.0, "commentaire": "", "statut": "cave"},
-  {"id": "b045", "cuvee": "jaune", "volume": 0.7, "millesime": "2022", "prix": 35.0, "commentaire": "", "statut": "cave"},
-  {"id": "b046", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "commentaire": "", "statut": "cave"},
-  {"id": "b047", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "commentaire": "", "statut": "cave"},
-  {"id": "b048", "cuvee": "coffret", "volume": 0.18, "format": "coffret 6 × 3 cl", "millesime": "2025", "prix": 25.0, "commentaire": "", "statut": "cave"},
-  {"id": "b049", "cuvee": "jaune", "volume": 0.03, "millesime": "2022", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b050", "cuvee": "jaune", "volume": 0.03, "millesime": "2023", "prix": null, "commentaire": "", "statut": "cave"},
-  {"id": "b051", "cuvee": "perso-anisette", "volume": 0.03, "millesime": "1976-1978", "prix": null, "commentaire": "", "statut": "cave"}
+  {
+   "id": "b001",
+   "cuvee": "rdl",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b002",
+   "cuvee": "rdl",
+   "volume": 0.7,
+   "millesime": "2023",
+   "prix": 300,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b003",
+   "cuvee": "vep-jaune",
+   "volume": 1,
+   "millesime": "2022",
+   "prix": 200,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b004",
+   "cuvee": "vep-jaune",
+   "volume": 1,
+   "millesime": "2023",
+   "prix": 200,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b005",
+   "cuvee": "vep-verte",
+   "volume": 1,
+   "millesime": "2020",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b006",
+   "cuvee": "vep-verte",
+   "volume": 1,
+   "millesime": "2022",
+   "prix": 200,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b007",
+   "cuvee": "vep-verte",
+   "volume": 1,
+   "millesime": "2022",
+   "prix": 200,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b008",
+   "cuvee": "vep-verte",
+   "volume": 1,
+   "millesime": "2022",
+   "prix": 200,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b009",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2020",
+   "prix": 80,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b010",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2020",
+   "prix": 80,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b011",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 75,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b012",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 75,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b013",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 60,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b014",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b015",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b016",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b017",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b018",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2021",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b019",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 75,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b020",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 75,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b021",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 80,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b022",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 80,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b023",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 80,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b024",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 60,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b025",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2024",
+   "prix": 95,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b026",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2024",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b027",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2024",
+   "prix": 89,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b028",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2024",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b029",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2024",
+   "prix": 90,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b030",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2024",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b031",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 95,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b032",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 95,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b033",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 95,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b034",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2026",
+   "prix": 95,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b035",
+   "cuvee": "centenaire",
+   "volume": 0.7,
+   "millesime": "2026",
+   "prix": 95,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b036",
+   "cuvee": "mof",
+   "volume": 3,
+   "millesime": "2023",
+   "prix": 325,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b037",
+   "cuvee": "mof",
+   "volume": 3,
+   "millesime": "2022",
+   "prix": 300,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b038",
+   "cuvee": "mof",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 58,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b039",
+   "cuvee": "mof",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 58,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b040",
+   "cuvee": "mof",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 59,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b041",
+   "cuvee": "mof",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 70,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b042",
+   "cuvee": "jaune",
+   "volume": 1,
+   "millesime": "2016",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b043",
+   "cuvee": "verte",
+   "volume": 0.7,
+   "millesime": "2017",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b044",
+   "cuvee": "tau",
+   "volume": 0.7,
+   "millesime": "2023",
+   "prix": 115,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b045",
+   "cuvee": "jaune",
+   "volume": 0.7,
+   "millesime": "2022",
+   "prix": 35,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b046",
+   "cuvee": "jaune",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 41,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b047",
+   "cuvee": "jaune",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 41,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b048",
+   "cuvee": "coffret",
+   "volume": 0.18,
+   "format": "coffret 6 × 3 cl",
+   "millesime": "2025",
+   "prix": 25,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b049",
+   "cuvee": "jaune",
+   "volume": 0.03,
+   "millesime": "2022",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b050",
+   "cuvee": "jaune",
+   "volume": 0.03,
+   "millesime": "2023",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  },
+  {
+   "id": "b051",
+   "cuvee": "perso-anisette",
+   "volume": 0.03,
+   "millesime": "1976-1978",
+   "prix": null,
+   "commentaire": "",
+   "statut": "cave"
+  }
  ]
 }
