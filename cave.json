@@ -21,6 +21,11 @@
    "nom": "Reine des Liqueurs",
    "c": "#f0ff1f",
    "ordre": 9
+  },
+  "vep-jaune": {
+   "nom": "V.E.P. Jaune",
+   "c": "#ebcf00",
+   "ordre": 10
   }
  },
  "bouteilles": [
