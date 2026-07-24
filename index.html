@@ -278,22 +278,18 @@ details .corps-repli{padding:0 15px 15px}
           </div>
         </div>
         <p class="aide plein">Une année (2024) ou une fourchette (1972-1978).</p>
-        <div class="plein">
+        <div>
           <label for="s-volume">Contenance</label>
           <div class="avec-unite">
             <input class="saisie" id="s-volume" type="number" inputmode="numeric" step="1" min="1" value="70">
             <span class="unite">cl</span>
           </div>
-          <div class="raccourcis" id="s-raccourcis"></div>
         </div>
         <div>
           <label for="s-quantite">Quantité</label>
           <input class="saisie" id="s-quantite" type="number" inputmode="numeric" min="1" max="99" value="1">
         </div>
-        <div>
-          <label for="s-provenance">Offerte par</label>
-          <input class="saisie" id="s-provenance" type="text" placeholder="—">
-        </div>
+        <div class="plein"><div class="raccourcis" id="s-raccourcis"></div></div>
         <div class="plein">
           <label for="s-commentaire">Commentaire</label>
           <textarea class="saisie" id="s-commentaire" placeholder="Lieu d'achat, état de l'étiquette, occasion…"></textarea>
@@ -408,11 +404,7 @@ details .corps-repli{padding:0 15px 15px}
       </div>
     </div>
     <div>
-      <label for="f-provenance">Offerte par</label>
-      <input class="saisie" id="f-provenance" type="text" placeholder="—">
-    </div>
-    <div class="plein">
-      <label for="f-format">Libellé de contenance libre</label>
+      <label for="f-format">Libellé libre</label>
       <input class="saisie" id="f-format" type="text" placeholder="—">
     </div>
     <div class="plein">
@@ -438,57 +430,59 @@ details .corps-repli{padding:0 15px 15px}
 <!-- Copie de secours : sert uniquement si cave.json est injoignable. -->
 <script type="application/json" id="graine">{
  "version": 2,
- "cuvees": {},
+ "cuvees": {"perso-anisette": {"nom": "Anisette", "c": "#D9D3BE", "ordre": 13.4}},
  "bouteilles": [
-  {"id": "b001", "cuvee": "rdl", "volume": 0.7, "millesime": "2021", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
-  {"id": "b002", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2022", "prix": 200.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b003", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2020", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
-  {"id": "b004", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 196.5, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b005", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 196.5, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b006", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 199.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b007", "cuvee": "mof", "volume": 0.7, "millesime": "2021", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
-  {"id": "b008", "cuvee": "mof", "volume": 3.0, "millesime": "2023", "prix": 325.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b009", "cuvee": "mof", "volume": 3.0, "millesime": "2022", "prix": 300.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b010", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b011", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b012", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b013", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b014", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b015", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b016", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b017", "cuvee": "jaune", "volume": 0.7, "millesime": "2022", "prix": 35.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b018", "cuvee": "jaune", "volume": 1.0, "millesime": "2016", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
-  {"id": "b019", "cuvee": "verte", "volume": 0.7, "millesime": "2017", "prix": null, "provenance": "Didier", "commentaire": "", "statut": "cave"},
-  {"id": "b020", "cuvee": "verte", "volume": 0.7, "millesime": "2022", "prix": 37.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b021", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b022", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b023", "cuvee": "mof", "volume": 0.7, "millesime": "2021", "prix": 59.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b024", "cuvee": "mof", "volume": 0.7, "millesime": "2021", "prix": 59.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b025", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b026", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b027", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b028", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 95.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b029", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b030", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b031", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 89.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b032", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": null, "provenance": "Parents", "commentaire": "", "statut": "cave"},
-  {"id": "b033", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b034", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b035", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b036", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b037", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b038", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b039", "cuvee": "rdl", "volume": 0.7, "millesime": "2023", "prix": 300.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b040", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2023", "prix": 300.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b041", "cuvee": "mof", "volume": 0.7, "millesime": "2025", "prix": 58.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b042", "cuvee": "verte", "volume": 0.7, "millesime": "2025", "prix": 42.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b043", "cuvee": "coffret", "volume": 0.18, "format": "coffret 6 × 3 cl", "millesime": "2025", "prix": 25.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b044", "cuvee": "mof", "volume": 0.7, "millesime": "2024", "prix": 70.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b045", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b046", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b047", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b048", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "provenance": "", "commentaire": "", "statut": "cave"},
-  {"id": "b049", "cuvee": "tau", "volume": 0.7, "millesime": "2023", "prix": 115.0, "provenance": "", "commentaire": "", "statut": "cave"}
+  {"id": "b001", "cuvee": "rdl", "volume": 0.7, "millesime": "2021", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b002", "cuvee": "rdl", "volume": 0.7, "millesime": "2023", "prix": 300.0, "commentaire": "", "statut": "cave"},
+  {"id": "b003", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2022", "prix": 300.0, "commentaire": "", "statut": "cave"},
+  {"id": "b004", "cuvee": "vep-jaune", "volume": 1.0, "millesime": "2023", "prix": 200.0, "commentaire": "", "statut": "cave"},
+  {"id": "b005", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2020", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b006", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 200.0, "commentaire": "", "statut": "cave"},
+  {"id": "b007", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 200.0, "commentaire": "", "statut": "cave"},
+  {"id": "b008", "cuvee": "vep-verte", "volume": 1.0, "millesime": "2022", "prix": 200.0, "commentaire": "", "statut": "cave"},
+  {"id": "b009", "cuvee": "centenaire", "volume": 0.7, "millesime": "2020", "prix": 80.0, "commentaire": "", "statut": "cave"},
+  {"id": "b010", "cuvee": "centenaire", "volume": 0.7, "millesime": "2020", "prix": 80.0, "commentaire": "", "statut": "cave"},
+  {"id": "b011", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "commentaire": "", "statut": "cave"},
+  {"id": "b012", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 75.0, "commentaire": "", "statut": "cave"},
+  {"id": "b013", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 60.0, "commentaire": "", "statut": "cave"},
+  {"id": "b014", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b015", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b016", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b017", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b018", "cuvee": "centenaire", "volume": 0.7, "millesime": "2021", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b019", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "commentaire": "", "statut": "cave"},
+  {"id": "b020", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 75.0, "commentaire": "", "statut": "cave"},
+  {"id": "b021", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "commentaire": "", "statut": "cave"},
+  {"id": "b022", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "commentaire": "", "statut": "cave"},
+  {"id": "b023", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 80.0, "commentaire": "", "statut": "cave"},
+  {"id": "b024", "cuvee": "centenaire", "volume": 0.7, "millesime": "2022", "prix": 60.0, "commentaire": "", "statut": "cave"},
+  {"id": "b025", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 95.0, "commentaire": "", "statut": "cave"},
+  {"id": "b026", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b027", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 89.0, "commentaire": "", "statut": "cave"},
+  {"id": "b028", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b029", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": 90.0, "commentaire": "", "statut": "cave"},
+  {"id": "b030", "cuvee": "centenaire", "volume": 0.7, "millesime": "2024", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b031", "cuvee": "centenaire", "volume": 0.7, "millesime": "2025", "prix": 95.0, "commentaire": "", "statut": "cave"},
+  {"id": "b032", "cuvee": "centenaire", "volume": 0.7, "millesime": "2025", "prix": 95.0, "commentaire": "", "statut": "cave"},
+  {"id": "b033", "cuvee": "centenaire", "volume": 0.7, "millesime": "2025", "prix": 95.0, "commentaire": "", "statut": "cave"},
+  {"id": "b034", "cuvee": "centenaire", "volume": 0.7, "millesime": "2026", "prix": 95.0, "commentaire": "", "statut": "cave"},
+  {"id": "b035", "cuvee": "centenaire", "volume": 0.7, "millesime": "2026", "prix": 95.0, "commentaire": "", "statut": "cave"},
+  {"id": "b036", "cuvee": "mof", "volume": 3.0, "millesime": "2023", "prix": 325.0, "commentaire": "", "statut": "cave"},
+  {"id": "b037", "cuvee": "mof", "volume": 3.0, "millesime": "2022", "prix": 300.0, "commentaire": "", "statut": "cave"},
+  {"id": "b038", "cuvee": "mof", "volume": 0.7, "millesime": "2022", "prix": 58.0, "commentaire": "", "statut": "cave"},
+  {"id": "b039", "cuvee": "mof", "volume": 0.7, "millesime": "2022", "prix": 58.0, "commentaire": "", "statut": "cave"},
+  {"id": "b040", "cuvee": "mof", "volume": 0.7, "millesime": "2025", "prix": 59.0, "commentaire": "", "statut": "cave"},
+  {"id": "b041", "cuvee": "mof", "volume": 0.7, "millesime": "2025", "prix": 70.0, "commentaire": "", "statut": "cave"},
+  {"id": "b042", "cuvee": "jaune", "volume": 1.0, "millesime": "2016", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b043", "cuvee": "verte", "volume": 0.7, "millesime": "2017", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b044", "cuvee": "tau", "volume": 0.7, "millesime": "2023", "prix": 115.0, "commentaire": "", "statut": "cave"},
+  {"id": "b045", "cuvee": "jaune", "volume": 0.7, "millesime": "2022", "prix": 35.0, "commentaire": "", "statut": "cave"},
+  {"id": "b046", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "commentaire": "", "statut": "cave"},
+  {"id": "b047", "cuvee": "jaune", "volume": 0.7, "millesime": "2025", "prix": 41.0, "commentaire": "", "statut": "cave"},
+  {"id": "b048", "cuvee": "coffret", "volume": 0.18, "format": "coffret 6 × 3 cl", "millesime": "2025", "prix": 25.0, "commentaire": "", "statut": "cave"},
+  {"id": "b049", "cuvee": "jaune", "volume": 0.03, "millesime": "2022", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b050", "cuvee": "jaune", "volume": 0.03, "millesime": "2023", "prix": null, "commentaire": "", "statut": "cave"},
+  {"id": "b051", "cuvee": "perso-anisette", "volume": 0.03, "millesime": "1976-1978", "prix": null, "commentaire": "", "statut": "cave"}
  ]
 }</script>
 
@@ -828,7 +822,7 @@ function rendreListe(){
   let vues = cave.filter(b => {
     if(filtre && b.cuvee !== filtre) return false;
     if(!q) return true;
-    return [nomCuvee(b), b.millesime, b.prix, b.provenance, b.commentaire, volLabel(b)]
+    return [nomCuvee(b), b.millesime, b.prix, b.commentaire, volLabel(b)]
       .join(" ").toLowerCase().includes(q);
   });
 
@@ -876,7 +870,7 @@ function ligne(b){
   if(b.millesime) bits.push(esc(b.millesime));
   bits.push(volLabel(b));
   if(b.prix) bits.push(euro(b.prix));
-  else if(b.provenance) bits.push(`<span class="don">offerte par ${esc(b.provenance)}</span>`);
+  else bits.push(`<span class="don">offerte</span>`);
   if(b.commentaire) bits.push(`<span class="don">${esc(b.commentaire)}</span>`);
   const c = info(b.cuvee).c;
   li.innerHTML = `<button class="ligne${b.statut !== "cave" ? " hors" : ""}">
@@ -975,7 +969,7 @@ $("s-ajouter").onclick = () => {
   const modele = {
     cuvee: cle, volume: cl/100, millesime: mil,
     prix: v("s-prix") ? Number(v("s-prix")) : null,
-    provenance: v("s-provenance"), commentaire: v("s-commentaire"), statut:"cave"
+    commentaire: v("s-commentaire"), statut:"cave"
   };
   for(let i = 0; i < n; i++) cave.push({...modele, id:"b" + Date.now().toString(36) + i.toString(36)});
 
@@ -989,7 +983,7 @@ $("s-ajouter").onclick = () => {
   $("s-bloc-perso").hidden = true;
 };
 $("s-vider").onclick = () => {
-  ["s-millesime","s-prix","s-provenance","s-commentaire","s-perso-nom"].forEach(i => $(i).value = "");
+  ["s-millesime","s-prix","s-commentaire","s-perso-nom"].forEach(i => $(i).value = "");
   $("s-quantite").value = 1; $("s-volume").value = 70; majRaccourcis();
   $("s-confirmation").textContent = "";
 };
@@ -1026,7 +1020,6 @@ function ouvrirFiche(id){
   $("f-millesime").value = b.millesime ?? "";
   $("f-volume").value = Math.round(Number(b.volume) * 100);
   $("f-prix").value = b.prix ?? "";
-  $("f-provenance").value = b.provenance || "";
   $("f-format").value = b.format || "";
   $("f-commentaire").value = b.commentaire || "";
   majStatut(b.statut || "cave");
@@ -1049,7 +1042,6 @@ $("f-enregistrer").onclick = () => {
     volume: Number(v("f-volume"))/100,
     millesime: normMillesime(v("f-millesime")),
     prix: v("f-prix") ? Number(v("f-prix")) : null,
-    provenance: v("f-provenance"),
     format: v("f-format"),
     commentaire: v("f-commentaire"),
     statut: statutSaisi
