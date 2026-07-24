@@ -27,6 +27,11 @@
    "c": "#f0ff1f",
    "ordre": 9
   },
+  "tau": {
+   "nom": "La Tau",
+   "c": "#cde01f",
+   "ordre": 6
+  },
   "vep-jaune": {
    "nom": "V.E.P. Jaune",
    "c": "#ebcf00",
