@@ -2,6 +2,11 @@
  "version": 2,
  "maj": "2026-07-24",
  "cuvees": {
+  "centenaire": {
+   "nom": "9e Centenaire",
+   "c": "#baff1a",
+   "ordre": 5
+  },
   "jaune": {
    "nom": "Chartreuse Jaune",
    "c": "#f5e000",
