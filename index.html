@@ -160,6 +160,12 @@ textarea.saisie{resize:vertical;min-height:58px;font-family:inherit}
 .teinte{width:24px;height:24px;border-radius:50%;border:1px solid rgba(0,0,0,.4)}
 .teinte[aria-pressed="true"]{box-shadow:0 0 0 2px var(--papier)}
 
+.cuv{display:flex;align-items:center;gap:13px;padding:7px 2px;border-bottom:1px solid var(--trait)}
+.cuv .pipette{width:30px;height:30px}
+.cuv-nom{flex:1;min-width:0;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cuv-n{font-size:12.5px;color:var(--papier-3)}
+.cuv.inutilisee .cuv-nom{color:var(--papier-3)}
+
 /* synchronisation */
 .bloc{border:1px solid var(--trait);border-radius:12px;padding:15px;margin-bottom:12px}
 .bloc h3{font-size:15px;margin-bottom:4px}
@@ -308,6 +314,13 @@ details .corps-repli{padding:0 15px 15px}
     </section>
 
     <section class="section">
+      <div class="section-tete"><h2>Couleurs des cuvées</h2><span class="trait"></span>
+        <button class="indice" id="k-reinit" style="text-decoration:underline">rétablir</button></div>
+      <p class="aide" style="margin-bottom:14px">Toucher une pastille pour changer la teinte d'une cuvée. Le changement vaut pour tous vos appareils. La place de la cuvée dans le spectre ne bouge pas.</p>
+      <div id="couleurs"></div>
+    </section>
+
+    <section class="section">
       <div class="section-tete"><h2>Dépôt</h2><span class="trait"></span></div>
 
       <div class="bloc">
@@ -377,13 +390,6 @@ details .corps-repli{padding:0 15px 15px}
     <div class="plein">
       <label for="f-cuvee">Cuvée</label>
       <select class="saisie" id="f-cuvee"></select>
-    </div>
-    <div class="plein" id="f-bloc-couleur" hidden>
-      <label for="f-couleur">Couleur de cette cuvée</label>
-      <div class="couleur-ligne">
-        <input type="color" class="pipette" id="f-couleur" aria-label="Couleur de la cuvée">
-        <div class="nuancier" id="f-nuancier"></div>
-      </div>
     </div>
     <div>
       <label for="f-millesime">Millésime</label>
@@ -514,7 +520,7 @@ const NUANCIER = ["#35762B","#4F9A31","#6BC13F","#8CA82E","#B9BE35","#C6B441",
 const RACCOURCIS_CL = [3, 20, 35, 50, 70, 100, 150, 300];
 
 let cuveesPerso = {};
-const info = k => CUVEES_BASE[k] || cuveesPerso[k] || CUVEES_BASE.autre;
+const info = k => cuveesPerso[k] || CUVEES_BASE[k] || CUVEES_BASE.autre;
 const toutesCuvees = () => ({...CUVEES_BASE, ...cuveesPerso});
 
 /* place dans le spectre déduite de la teinte : vert → début, ambre → fin */
@@ -590,7 +596,9 @@ let jeton = "";
 
 const cuveesUtiles = () => {
   const u = new Set(cave.map(b => b.cuvee)), o = {};
-  Object.keys(cuveesPerso).sort().forEach(k => { if(u.has(k)) o[k] = cuveesPerso[k]; });
+  Object.keys(cuveesPerso).sort().forEach(k => {
+    if(CUVEES_BASE[k] || u.has(k)) o[k] = cuveesPerso[k];   // recoloration, ou cuvée créée et utilisée
+  });
   return o;
 };
 const empreinte = () => JSON.stringify([cuveesUtiles(), cave]);
@@ -745,6 +753,7 @@ function rendre(){
   rendreMillesimes(enCave);
   rendreListe();
   rendreRecentes();
+  rendreCouleurs();
 }
 
 function rendreSpectre(enCave){
@@ -856,6 +865,37 @@ function rendreListe(){
   });
 }
 
+function rendreCouleurs(){
+  const cat = toutesCuvees();
+  const comptes = {};
+  cave.filter(b => b.statut === "cave").forEach(b => comptes[b.cuvee] = (comptes[b.cuvee]||0) + 1);
+  const cles = Object.keys(cat).sort((x,y) => cat[x].ordre - cat[y].ordre);
+
+  const hote = $("couleurs");
+  hote.innerHTML = "";
+  cles.forEach(k => {
+    const n = comptes[k] || 0;
+    const d = document.createElement("div");
+    d.className = "cuv" + (n ? "" : " inutilisee");
+    d.innerHTML = `<input type="color" class="pipette" value="${info(k).c}" aria-label="Couleur de ${esc(info(k).nom)}">
+      <span class="cuv-nom">${esc(info(k).nom)}</span>
+      <span class="cuv-n">${n || "—"}</span>`;
+    const pip = d.querySelector("input");
+    pip.addEventListener("input", () => { poserCouleur(k, pip.value); rendre(); });
+    pip.addEventListener("change", () => { poserCouleur(k, pip.value); toucher(); });
+    hote.appendChild(d);
+  });
+}
+function poserCouleur(k, c){
+  const base = CUVEES_BASE[k];
+  if(base) cuveesPerso[k] = {nom:base.nom, c, ordre:base.ordre};
+  else if(cuveesPerso[k]) cuveesPerso[k] = {...cuveesPerso[k], c};
+}
+$("k-reinit").onclick = () => {
+  Object.keys(CUVEES_BASE).forEach(k => delete cuveesPerso[k]);
+  toucher();
+};
+
 function rendreRecentes(){
   const r = $("recentes");
   r.innerHTML = "";
@@ -929,7 +969,6 @@ function remplirSelects(){
   });
 }
 $("s-cuvee").onchange = () => { $("s-bloc-perso").hidden = $("s-cuvee").value !== "__nouvelle"; };
-$("f-cuvee").onchange = majCouleurFiche;
 
 /* ===== raccourcis de contenance ===== */
 const rac = $("s-raccourcis");
@@ -999,24 +1038,12 @@ function toutFermer(){
 voile.onclick = toutFermer;
 document.addEventListener("keydown", e => { if(e.key === "Escape") toutFermer(); });
 
-function majCouleurFiche(){
-  const k = $("f-cuvee").value;
-  const perso = !!cuveesPerso[k];
-  $("f-bloc-couleur").hidden = !perso;
-  if(perso) $("f-couleur").value = cuveesPerso[k].c;
-}
-monterNuancier($("f-nuancier"), $("f-couleur"), c => {
-  const k = $("f-cuvee").value;
-  if(cuveesPerso[k]){ cuveesPerso[k].c = c; cuveesPerso[k].ordre = ordreDepuisCouleur(c); }
-});
-
 function ouvrirFiche(id){
   edition = id;
   const b = cave.find(x => x.id === id);
   if(!b) return;
   $("fiche-titre").textContent = nomCuvee(b);
   $("f-cuvee").value = b.cuvee;
-  majCouleurFiche();
   $("f-millesime").value = b.millesime ?? "";
   $("f-volume").value = Math.round(Number(b.volume) * 100);
   $("f-prix").value = b.prix ?? "";

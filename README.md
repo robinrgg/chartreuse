@@ -85,8 +85,8 @@ depuis GitHub et en générer un autre. Le bouton **Oublier le jeton** l'efface 
 - `millesime` : une année (`"2021"`) ou une fourchette (`"1972-1978"`). Les fourchettes
   sont classées d'après leur première année et forment leur propre ligne dans les
   statistiques. `null` pour une bouteille sans date.
-- `prix` : prix d'achat, `null` si la bouteille était un cadeau ; `provenance` prend alors
-  le nom du donneur.
+- `prix` : prix d'achat, ou `null`. Une bouteille sans prix est considérée comme offerte et
+  s'affiche ainsi dans la liste.
 - `statut` : `cave`, `bue` ou `offerte`. Seules les bouteilles `cave` comptent dans le
   spectre, les millésimes et les totaux ; les autres restent dans la liste, barrées.
 
@@ -103,13 +103,31 @@ Chaque cuvée porte la teinte de sa liqueur :
 
 Le spectre est ordonné du vert le plus sombre à l'ambre le plus profond, le bleu à la fin.
 
+## Changer la couleur d'une cuvée
+
+Onglet **Saisie**, section **Couleurs des cuvées** : toutes les cuvées du catalogue y sont
+listées dans l'ordre du spectre, avec le nombre de bouteilles de chacune. Toucher une
+pastille ouvre le sélecteur de couleur du téléphone ; le spectre et la liste se mettent à
+jour immédiatement, et la nouvelle teinte part dans `cave.json` comme le reste — donc elle
+vaut pour tous les appareils, définitivement.
+
+Une recoloration ne déplace pas la cuvée dans le spectre : sa position reste celle du
+catalogue. Le lien **rétablir**, en tête de section, rend leurs teintes d'origine aux cuvées
+de Chartreuse sans toucher aux cuvées que vous avez créées.
+
+Techniquement, la section `cuvees` de `cave.json` sert aux deux : une clé connue
+(`centenaire`, `jaune`…) y est une **recoloration** qui prend le pas sur le catalogue
+d'`index.html` ; une clé inconnue (`perso-…`) est une **cuvée que vous avez créée**. Les
+premières sont conservées telles quelles, les secondes disparaissent d'elles-mêmes quand
+plus aucune bouteille ne les utilise.
+
 ## Ajouter une cuvée depuis l'appli
 
 Dans le formulaire de saisie, choisir **＋ Nouvelle cuvée…**, lui donner un nom et une
 couleur — au nuancier ou à la pipette. La cuvée prend automatiquement sa place dans le
 spectre d'après la teinte choisie : une couleur verte la place tôt, un ambre vers la fin,
-un bleu ou un violet tout à la fin. Sa couleur se corrige ensuite depuis la fiche de
-n'importe laquelle de ses bouteilles. Une cuvée dont plus aucune bouteille ne dépend
+un bleu ou un violet tout à la fin. Sa couleur se corrige ensuite depuis la section
+**Couleurs des cuvées**, comme les autres. Une cuvée dont plus aucune bouteille ne dépend
 disparaît d'elle-même du fichier.
 
 ## Saisie en série
