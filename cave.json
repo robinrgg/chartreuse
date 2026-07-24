@@ -2,6 +2,11 @@
  "version": 2,
  "maj": "2026-07-24",
  "cuvees": {
+  "mof": {
+   "nom": "Cuvée des M.O.F.",
+   "c": "#dbf01d",
+   "ordre": 4
+  },
   "perso-anisette": {
    "nom": "Anisette",
    "c": "#D9D3BE",
