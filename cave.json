@@ -16,6 +16,11 @@
    "nom": "Anisette",
    "c": "#D9D3BE",
    "ordre": 13.4
+  },
+  "rdl": {
+   "nom": "Reine des Liqueurs",
+   "c": "#f0ff1f",
+   "ordre": 9
   }
  },
  "bouteilles": [
