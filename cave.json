@@ -1,6 +1,6 @@
 {
  "version": 2,
- "maj": "2026-07-24",
+ "maj": "2026-08-09",
  "cuvees": {
   "centenaire": {
    "nom": "9e Centenaire",
@@ -498,6 +498,15 @@
    "prix": null,
    "commentaire": "",
    "statut": "cave"
+  },
+  {
+   "cuvee": "coffret",
+   "volume": 0.18,
+   "millesime": "2011-2014",
+   "prix": 35,
+   "commentaire": "",
+   "statut": "cave",
+   "id": "bmsljua3s0"
   }
  ]
 }
