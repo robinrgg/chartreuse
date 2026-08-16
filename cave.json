@@ -1,6 +1,6 @@
 {
  "version": 2,
- "maj": "2026-08-09",
+ "maj": "2026-08-16",
  "cuvees": {
   "centenaire": {
    "nom": "9e Centenaire",
@@ -508,6 +508,24 @@
    "statut": "cave",
    "id": "bmsljua3s0",
    "format": "coffret 6 x 3 cl"
+  },
+  {
+   "cuvee": "verte",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 42,
+   "commentaire": "",
+   "statut": "cave",
+   "id": "bmsw2yut00"
+  },
+  {
+   "cuvee": "verte",
+   "volume": 0.7,
+   "millesime": "2025",
+   "prix": 42,
+   "commentaire": "",
+   "statut": "cave",
+   "id": "bmsw2yut01"
   }
  ]
 }
