@@ -1,6 +1,6 @@
 {
  "version": 2,
- "maj": "2026-08-16",
+ "maj": "2026-10-17",
  "cuvees": {
   "centenaire": {
    "nom": "9e Centenaire",
@@ -21,6 +21,11 @@
    "nom": "Anisette",
    "c": "#91ffe5",
    "ordre": 13.4
+  },
+  "perso-fou-de-chartreuse": {
+   "nom": "Fou de chartreuse",
+   "c": "#aaff54",
+   "ordre": 5.514619883040935
   },
   "rdl": {
    "nom": "Reine des Liqueurs",
@@ -526,6 +531,15 @@
    "commentaire": "",
    "statut": "cave",
    "id": "bmsw2yut01"
+  },
+  {
+   "cuvee": "perso-fou-de-chartreuse",
+   "volume": 0.7,
+   "millesime": "2026",
+   "prix": 98,
+   "commentaire": "",
+   "statut": "cave",
+   "id": "bmvc46d9w0"
   }
  ]
 }
